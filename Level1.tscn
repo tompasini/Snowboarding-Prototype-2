@@ -12,3 +12,31 @@ tile_data = PoolIntArray( 196609, 0, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 94, 178 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+editor_draw_limits = true
+
+[node name="Timer" type="Timer" parent="Player"]
+process_mode = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="Label" type="Label" parent="Player"]
+margin_left = -496.0
+margin_top = -281.0
+margin_right = -399.0
+margin_bottom = -254.0
+text = "Speed: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Speed" type="Label" parent="Player"]
+margin_left = -448.0
+margin_top = -281.0
+margin_right = -368.0
+margin_bottom = -260.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

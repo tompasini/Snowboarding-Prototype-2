@@ -35,13 +35,14 @@ func _physics_process(delta):
 	$Speed.text = str(speed)
 	
 func body_enter(body):
-	var isPole = body.is_in_group("pole")
-	var direction = $AnimatedSprite.flip_h
-	if(isPole):
-		if(!direction):
-			speed = (BASE_SPEED + POLE_MODIFIER)
-		else:
-			speed = -(BASE_SPEED + POLE_MODIFIER)
+	print('pole stuff')
+#	var isPole = body.is_in_group("pole")
+#	var direction = $AnimatedSprite.flip_h
+#	if(isPole):
+#		if(!direction):
+#			speed = (BASE_SPEED + POLE_MODIFIER)
+#		else:
+#			speed = -(BASE_SPEED + POLE_MODIFIER)
 			
 func set_velocity():
 	velocity.y += GRAVITY
