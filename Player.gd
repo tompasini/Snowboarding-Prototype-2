@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var velocity = Vector2(0, 0)
 var speed = 0
+var boostPower = 1000
 var JUMPFORCE = -900 + (speed/2)
 const GRAVITY = 75
 const BASE_SPEED = 450
@@ -26,6 +27,12 @@ func _physics_process(delta):
 			speed = BASE_SPEED
 		elif($AnimatedSprite.flip_h && speed == 0):
 			speed = -BASE_SPEED
+			
+	if(Input.is_action_pressed("boost") && boostPower > 0 && speed != 0):
+		boostPower -= 10
+		$BoostBar.value = boostPower
+		increase_speed(10, $AnimatedSprite.flip_h)
+		print(speed)
 	
 	set_velocity()
 	
@@ -34,8 +41,8 @@ func _physics_process(delta):
 		
 	$Speed.text = str(speed)
 	
-func body_enter(body):
-	print('pole stuff')
+#func body_enter(body):
+#	print('pole stuff')
 #	var isPole = body.is_in_group("pole")
 #	var direction = $AnimatedSprite.flip_h
 #	if(isPole):
@@ -44,13 +51,19 @@ func body_enter(body):
 #		else:
 #			speed = -(BASE_SPEED + POLE_MODIFIER)
 			
+func increase_speed(modifier, direction):
+	if(!direction):
+		speed += modifier
+	else:
+		speed += -modifier
+
 func set_velocity():
 	velocity.y += GRAVITY
 	velocity.x = speed
 	velocity = move_and_slide(velocity, Vector2.UP)
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
-		body_enter(collision.collider)
+#		body_enter(collision.collider)
 		
 func assign_rotation(normal, degrees):
 	var offset: float = deg2rad(degrees)
