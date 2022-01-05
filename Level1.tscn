@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Tilesets/IceTileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Map Assets/Backgrounds/640x360 Background 2.png" type="Texture" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.945098, 0.521569, 0.027451, 1 )
+bg_color = Color( 0.952941, 0.545098, 0.0235294, 1 )
 
 [node name="Level1" type="Node2D"]
 
@@ -28,7 +29,7 @@ process_mode = 0
 wait_time = 2.0
 one_shot = true
 
-[node name="Label" type="Label" parent="Player"]
+[node name="Speed Label" type="Label" parent="Player"]
 margin_left = -496.0
 margin_top = -281.0
 margin_right = -399.0
@@ -58,7 +59,6 @@ __meta__ = {
 }
 
 [node name="BoostBar" type="ProgressBar" parent="Player"]
-modulate = Color( 0.968627, 0.678431, 0.0392157, 1 )
 material = SubResource( 1 )
 margin_left = -231.0
 margin_top = -282.0
@@ -71,3 +71,22 @@ percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Player"]
+scroll_base_scale = Vector2( 1, 2 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Player/ParallaxBackground"]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="Player/ParallaxBackground/ParallaxLayer"]
+visible = false
+position = Vector2( -414, -236 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Sprite" type="Sprite" parent="Player"]
+position = Vector2( 129, -60 )
+scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 3 )
