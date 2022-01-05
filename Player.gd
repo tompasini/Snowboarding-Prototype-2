@@ -25,6 +25,7 @@ func _physics_process(delta):
 		
 	if(is_on_floor()):
 		jumpCount = 2
+		$AnimatedSprite.play('idle')		
 
 	if(Input.is_action_just_pressed("jump") && jumpCount != 0):
 		velocity.y = -1
@@ -45,10 +46,15 @@ func _physics_process(delta):
 	
 	set_velocity()
 	
+	
 	if(speed > BASE_SPEED && normal.x == 0):
 		slow_down()
 		
 	$Speed.text = str(speed)
+	
+#	tricks
+	if(Input.is_action_just_pressed("backflip") && !is_on_floor()):
+		$AnimatedSprite.play('backflip')
 	
 #func body_enter(body):
 #	print('pole stuff')
@@ -85,3 +91,15 @@ func slow_down():
 	if($Timer.time_left == 0):
 			speed -= 50
 			$Timer.start()
+
+
+func _on_AnimatedSprite_animation_finished():
+	if($AnimatedSprite.animation == 'backflip'):
+		if(boostPower <= 700):
+			boostPower += 300
+			$BoostBar.value = boostPower
+		else:
+			boostPower += (1000 - boostPower)
+			$BoostBar.value = boostPower
+		$AnimatedSprite.play('idle')
+		
