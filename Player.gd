@@ -3,12 +3,16 @@ extends KinematicBody2D
 var velocity = Vector2(0, 0)
 var speed = 0
 var boostPower = 1000
-var jumpCount
+var jumpCount = 2
 var firstJump = -900 + (speed/2)
 var secondJump = -900
 const GRAVITY = 75
 const BASE_SPEED = 450
 const POLE_MODIFIER = 350
+
+enum States {ON_GROUND, IN_AIR}
+
+var _state = States.ON_GROUND
 
 func _physics_process(delta):
 	var normal: Vector2 = get_floor_normal()
@@ -24,15 +28,19 @@ func _physics_process(delta):
 		get_tree().reload_current_scene()
 		
 	if(is_on_floor()):
-		jumpCount = 2
+		if(_state != States.ON_GROUND):
+			_state = States.ON_GROUND
+			jumpCount = 2
 		$AnimatedSprite.play('idle')		
 
 	if(Input.is_action_just_pressed("jump") && jumpCount != 0):
+		_state = States.IN_AIR
 		velocity.y = -1
 		if(jumpCount == 2):
 			velocity.y += firstJump
 		else:
 			velocity.y += secondJump
+		
 		jumpCount -= 1
 		if(!$AnimatedSprite.flip_h && speed == 0):
 			speed = BASE_SPEED
