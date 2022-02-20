@@ -10,9 +10,9 @@ const GRAVITY = 75
 const BASE_SPEED = 450
 const POLE_MODIFIER = 350
 
-enum States {ON_GROUND, IN_AIR}
+enum States {ON_GROUND_IDLE, ON_GROUND_RIDING, IN_AIR}
 
-var _state = States.ON_GROUND
+var _state = States.ON_GROUND_IDLE
 
 func _physics_process(delta):
 	var normal: Vector2 = get_floor_normal()
@@ -28,19 +28,22 @@ func _physics_process(delta):
 		get_tree().reload_current_scene()
 		
 	if(is_on_floor()):
-		if(_state != States.ON_GROUND):
-			_state = States.ON_GROUND
+		if(_state != States.ON_GROUND_RIDING || _state != States.ON_GROUND_IDLE):
+			if(speed):
+				_state = States.ON_GROUND_RIDING
+				$AnimatedSprite.play("riding")
+			else:
+				_state = States.ON_GROUND_IDLE
+				$AnimatedSprite.play("idle")		
 			jumpCount = 2
-		$AnimatedSprite.play('idle')		
 
 	if(Input.is_action_just_pressed("jump") && jumpCount != 0):
-		_state = States.IN_AIR
 		velocity.y = -1
+		_state = States.IN_AIR
 		if(jumpCount == 2):
 			velocity.y += firstJump
 		else:
 			velocity.y += secondJump
-		
 		jumpCount -= 1
 		if(!$AnimatedSprite.flip_h && speed == 0):
 			speed = BASE_SPEED
@@ -61,8 +64,12 @@ func _physics_process(delta):
 	$Speed.text = str(speed)
 	
 #	tricks
-	if(Input.is_action_just_pressed("backflip") && !is_on_floor()):
-		$AnimatedSprite.play('backflip')
+	if(_state == States.IN_AIR):
+		if(Input.is_action_just_pressed("backflip")):
+			pass
+#			$AnimatedSprite.play('backflip')
+		if(Input.is_action_just_pressed("360")):
+			$AnimatedSprite.play("360")
 	
 #func body_enter(body):
 #	print('pole stuff')
