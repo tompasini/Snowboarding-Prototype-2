@@ -2,13 +2,13 @@ extends KinematicBody2D
 
 var velocity = Vector2(0, 0)
 var speed = 0
-var boostPower = 1000
+var boostPower = 500
 var jumpCount = 2
-var firstJump = -900 + (speed/2)
-var secondJump = -900
+var firstJump = -500 + (speed/2)
+var secondJump = -500
 const GRAVITY = 75
-const BASE_SPEED = 450
-const POLE_MODIFIER = 350
+const BASE_SPEED = 225
+const POLE_MODIFIER = 175
 
 enum States {ON_GROUND_IDLE, ON_GROUND_RIDING, IN_AIR}
 
@@ -29,7 +29,7 @@ func _physics_process(delta):
 		
 	if(is_on_floor()):
 		if(_state != States.ON_GROUND_RIDING || _state != States.ON_GROUND_IDLE):
-			if(speed):
+			if(speed || normal):
 				_state = States.ON_GROUND_RIDING
 				$AnimatedSprite.play("riding")
 			else:
