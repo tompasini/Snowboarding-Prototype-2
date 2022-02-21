@@ -6,6 +6,7 @@ var boostPower = 500
 var jumpCount = 2
 var firstJump = -500 + (speed/2)
 var secondJump = -500
+var boostJumped
 const GRAVITY = 75
 const BASE_SPEED = 225
 const POLE_MODIFIER = 175
@@ -38,19 +39,16 @@ func _physics_process(delta):
 			jumpCount = 2
 
 	if(Input.is_action_just_pressed("jump") && jumpCount != 0):
-		velocity.y = -1
-		_state = States.IN_AIR
-		if(jumpCount == 2):
-			velocity.y += firstJump
-		else:
-			velocity.y += secondJump
-		jumpCount -= 1
-		if(!$AnimatedSprite.flip_h && speed == 0):
-			speed = BASE_SPEED
-		elif($AnimatedSprite.flip_h && speed == 0):
-			speed = -BASE_SPEED
+		jump()
 	
 	if(Input.is_action_pressed("boost") && boostPower > 0 && speed != 0):
+		if(Input.is_action_just_pressed("jump") && jumpCount > 0):
+			jump()
+			boostJumped = true
+		if(boostJumped && _state == States.IN_AIR):
+			$AnimatedSprite.play("jump")
+		else:
+			$AnimatedSprite.play("squat")
 		boostPower -= 10
 		$BoostBar.value = boostPower
 		increase_speed(10, $AnimatedSprite.flip_h)
@@ -118,3 +116,16 @@ func _on_AnimatedSprite_animation_finished():
 			$BoostBar.value = boostPower
 		$AnimatedSprite.play('idle')
 		
+func jump():
+	velocity.y = -1
+	_state = States.IN_AIR
+	if(jumpCount == 2):
+		velocity.y += firstJump
+	else:
+		velocity.y += secondJump
+	jumpCount -= 1
+	$AnimatedSprite.play('jump')
+	if(!$AnimatedSprite.flip_h && speed == 0):
+		speed = BASE_SPEED
+	elif($AnimatedSprite.flip_h && speed == 0):
+		speed = -BASE_SPEED
