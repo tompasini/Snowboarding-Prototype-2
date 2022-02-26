@@ -2,13 +2,13 @@ extends KinematicBody2D
 
 var velocity = Vector2(0, 0)
 var speed = 0
-var boostPower = 500
+var boostPower = 0
+var maxBoostPower = 500
 var jumpCount = 2
-var firstJump = -500 + (speed/2)
-var secondJump = -500
+var jumpHeight = -700
 var boostJumped
 const GRAVITY = 75
-const BASE_SPEED = 225
+const BASE_SPEED = 300
 const POLE_MODIFIER = 175
 
 enum States {ON_GROUND_IDLE, ON_GROUND_RIDING, IN_AIR}
@@ -29,6 +29,8 @@ func _physics_process(delta):
 		get_tree().reload_current_scene()
 		
 	if(is_on_floor()):
+		if(boostJumped):
+			boostJumped = false
 		if(_state != States.ON_GROUND_RIDING || _state != States.ON_GROUND_IDLE):
 			if(speed || normal):
 				_state = States.ON_GROUND_RIDING
@@ -43,7 +45,6 @@ func _physics_process(delta):
 	
 	if(Input.is_action_pressed("boost") && boostPower > 0 && speed != 0):
 		if(Input.is_action_just_pressed("jump") && jumpCount > 0):
-			jump()
 			boostJumped = true
 		if(boostJumped && _state == States.IN_AIR):
 			$AnimatedSprite.play("jump")
@@ -107,22 +108,17 @@ func slow_down():
 
 
 func _on_AnimatedSprite_animation_finished():
-	if($AnimatedSprite.animation == 'backflip'):
-		if(boostPower <= 700):
-			boostPower += 300
-			$BoostBar.value = boostPower
-		else:
-			boostPower += (1000 - boostPower)
-			$BoostBar.value = boostPower
-		$AnimatedSprite.play('idle')
+	if($AnimatedSprite.animation == '360'):
+		boostPower = maxBoostPower
+		$BoostBar.value = boostPower
 		
 func jump():
 	velocity.y = -1
 	_state = States.IN_AIR
 	if(jumpCount == 2):
-		velocity.y += firstJump
+		velocity.y += (jumpHeight + -(speed/2))
 	else:
-		velocity.y += secondJump
+		velocity.y += jumpHeight
 	jumpCount -= 1
 	$AnimatedSprite.play('jump')
 	if(!$AnimatedSprite.flip_h && speed == 0):
