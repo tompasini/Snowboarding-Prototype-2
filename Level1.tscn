@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Tilesets/IceTileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Assets/Tilesets/SnowDirt1.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Map Assets/Backgrounds/640x360 Background 2.png" type="Texture" id=3]
 
@@ -14,14 +14,16 @@ bg_color = Color( 0.952941, 0.545098, 0.0235294, 1 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 196609, 0, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 16, 0, 262145, 6, 0, 262146, 34, 0, 262147, 34, 0, 262148, 34, 0, 262149, 34, 0, 262150, 34, 0, 262151, 34, 0, 262152, 34, 0, 262153, 18, 0, 262154, 16, 0, 327681, 6, 0, 327682, 34, 0, 327683, 34, 0, 327684, 34, 0, 327685, 34, 0, 327686, 34, 0, 327687, 34, 0, 327688, 34, 0, 327689, 34, 0, 327690, 18, 0, 327691, 16, 0, 393228, 16, 0, 458765, 16, 0, 524302, 16, 0 )
+tile_data = PoolIntArray( 786437, 57, 0, 786438, 66, 0, 786439, 66, 0, 786440, 66, 0, 786441, 66, 0, 786442, 66, 0, 786443, 66, 0, 786444, 66, 0, 786445, 66, 0, 786446, 66, 0, 786447, 66, 0, 786448, 66, 0, 786449, 66, 0, 786450, 66, 0, 786451, 66, 0, 786452, 66, 0, 786453, 66, 0, 786454, 66, 0, 786455, 59, 0, 851973, 60, 0, 851974, 61, 0, 851975, 61, 0, 851976, 61, 0, 851977, 61, 0, 851978, 61, 0, 851979, 61, 0, 851980, 61, 0, 851981, 61, 0, 851982, 61, 0, 851983, 61, 0, 851984, 61, 0, 851985, 61, 0, 851986, 61, 0, 851987, 61, 0, 851988, 61, 0, 851989, 61, 0, 851990, 61, 0, 851991, 62, 0, 917509, 60, 0, 917510, 61, 0, 917511, 61, 0, 917512, 61, 0, 917513, 61, 0, 917514, 61, 0, 917515, 61, 0, 917516, 61, 0, 917517, 61, 0, 917518, 61, 0, 917519, 61, 0, 917520, 61, 0, 917521, 61, 0, 917522, 61, 0, 917523, 61, 0, 917524, 61, 0, 917525, 61, 0, 917526, 61, 0, 917527, 62, 0, 983045, 60, 0, 983046, 61, 0, 983047, 61, 0, 983048, 61, 0, 983049, 61, 0, 983050, 61, 0, 983051, 61, 0, 983052, 61, 0, 983053, 61, 0, 983054, 61, 0, 983055, 61, 0, 983056, 61, 0, 983057, 61, 0, 983058, 61, 0, 983059, 61, 0, 983060, 61, 0, 983061, 61, 0, 983062, 61, 0, 983063, 62, 0, 1048581, 60, 0, 1048582, 61, 0, 1048583, 61, 0, 1048584, 61, 0, 1048585, 61, 0, 1048586, 61, 0, 1048587, 61, 0, 1048588, 61, 0, 1048589, 61, 0, 1048590, 61, 0, 1048591, 61, 0, 1048592, 61, 0, 1048593, 61, 0, 1048594, 61, 0, 1048595, 61, 0, 1048596, 61, 0, 1048597, 61, 0, 1048598, 61, 0, 1048599, 62, 0, 1114117, 63, 0, 1114118, 64, 0, 1114119, 64, 0, 1114120, 64, 0, 1114121, 64, 0, 1114122, 64, 0, 1114123, 64, 0, 1114124, 64, 0, 1114125, 64, 0, 1114126, 64, 0, 1114127, 64, 0, 1114128, 64, 0, 1114129, 64, 0, 1114130, 64, 0, 1114131, 64, 0, 1114132, 64, 0, 1114133, 64, 0, 1114134, 64, 0, 1114135, 65, 0, 1245247, 57, 0, 1245248, 66, 0, 1245249, 66, 0, 1245250, 66, 0, 1245251, 66, 0, 1245252, 66, 0, 1245253, 66, 0, 1245254, 66, 0, 1245255, 66, 0, 1245256, 66, 0, 1245257, 66, 0, 1245258, 66, 0, 1245259, 67, 0, 1441823, 57, 0, 1441824, 66, 0, 1441825, 66, 0, 1441826, 66, 0, 1441827, 66, 0, 1441828, 66, 0, 1441829, 66, 0, 1441830, 66, 0, 1441831, 66, 0, 1441832, 66, 0, 1441833, 66, 0, 1441834, 66, 0, 1441835, 66, 0, 1441836, 66, 0, 1441837, 59, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 94, 178 )
+position = Vector2( 94, 183 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+zoom = Vector2( 0.75, 0.75 )
 editor_draw_limits = true
 
 [node name="Timer" type="Timer" parent="Player"]
@@ -30,29 +32,26 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Speed Label" type="Label" parent="Player"]
-margin_left = -496.0
-margin_top = -281.0
-margin_right = -399.0
-margin_bottom = -254.0
+margin_left = -376.0
+margin_top = -213.0
+margin_right = -279.0
+margin_bottom = -186.0
 text = "Speed: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Speed" type="Label" parent="Player"]
-margin_left = -448.0
-margin_top = -281.0
-margin_right = -368.0
-margin_bottom = -260.0
+margin_left = -330.0
+margin_top = -216.0
+margin_right = -250.0
+margin_bottom = -195.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BoostBar Label" type="Label" parent="Player"]
-margin_left = -223.0
-margin_top = -296.0
-margin_right = -137.0
-margin_bottom = -280.0
+margin_left = -228.0
+margin_top = -214.0
+margin_right = -142.0
+margin_bottom = -198.0
 text = "Boost Power"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -60,17 +59,13 @@ __meta__ = {
 
 [node name="BoostBar" type="ProgressBar" parent="Player"]
 material = SubResource( 1 )
-margin_left = -231.0
-margin_top = -282.0
-margin_right = -98.0
-margin_bottom = -259.0
+margin_left = -229.0
+margin_top = -194.0
+margin_right = -96.0
+margin_bottom = -171.0
 custom_styles/fg = SubResource( 2 )
-max_value = 1000.0
-value = 1000.0
+max_value = 500.0
 percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Player"]
 scroll_base_scale = Vector2( 1, 2 )
@@ -86,7 +81,7 @@ texture = ExtResource( 3 )
 centered = false
 
 [node name="Sprite" type="Sprite" parent="Player"]
-position = Vector2( 129, -60 )
-scale = Vector2( 2, 2 )
+position = Vector2( 502, 175.5 )
+scale = Vector2( 2.77187, 2.23611 )
 z_index = -1
 texture = ExtResource( 3 )

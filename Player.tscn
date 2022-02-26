@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprite Assets/Animations/1x16Jump_Grab_Grind_Falling_Animation-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprite Assets/Animations/Sprite_Rotation_Animation.png" type="Texture" id=6]
 
 [sub_resource type="AtlasTexture" id=2]
@@ -12,6 +13,11 @@ region = Rect2( 0, 0, 20, 19 )
 flags = 4
 atlas = ExtResource( 6 )
 region = Rect2( 20, 0, 20, 19 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 26, 0, 26, 21 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -63,6 +69,11 @@ flags = 4
 atlas = ExtResource( 6 )
 region = Rect2( 180, 0, 20, 19 )
 
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 52, 0, 26, 21 )
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ SubResource( 2 ) ],
@@ -75,9 +86,19 @@ animations = [ {
 "name": "riding",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 14 ) ],
+"loop": true,
+"name": "squat",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "360",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 15 ) ],
+"loop": true,
+"name": "jump",
 "speed": 5.0
 } ]
 
@@ -86,10 +107,11 @@ script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "riding"
-speed_scale = 2.5
+animation = "idle"
+speed_scale = 5.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( -5, -8, 4, -8, 4, -5, 2, -2, 7, -1, 7, 2, 4, 2, 4, 7, 8, 7, -9, 7, -6, 6, -4, 2, -9, 1, -7, -2, -3, -2 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
