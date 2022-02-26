@@ -29,16 +29,7 @@ func _physics_process(delta):
 		get_tree().reload_current_scene()
 		
 	if(is_on_floor()):
-		if(boostJumped):
-			boostJumped = false
-		if(_state != States.ON_GROUND_RIDING || _state != States.ON_GROUND_IDLE):
-			if(speed || normal):
-				_state = States.ON_GROUND_RIDING
-				$AnimatedSprite.play("riding")
-			else:
-				_state = States.ON_GROUND_IDLE
-				$AnimatedSprite.play("idle")		
-			jumpCount = 2
+		set_ground_state(normal)
 
 	if(Input.is_action_just_pressed("jump") && jumpCount != 0):
 		jump()
@@ -125,3 +116,16 @@ func jump():
 		speed = BASE_SPEED
 	elif($AnimatedSprite.flip_h && speed == 0):
 		speed = -BASE_SPEED
+		
+func set_ground_state(normal):
+	if(boostJumped):
+		boostJumped = false
+	if(_state != States.ON_GROUND_RIDING || _state != States.ON_GROUND_IDLE):
+		if(speed || normal):
+			_state = States.ON_GROUND_RIDING
+			$AnimatedSprite.play("riding")
+		else:
+			_state = States.ON_GROUND_IDLE
+			$AnimatedSprite.play("idle")
+		if(!jumpCount):
+			jumpCount = 2
