@@ -60,6 +60,9 @@ func _physics_process(delta):
 #			$AnimatedSprite.play('backflip')
 		if(Input.is_action_just_pressed("360")):
 			$AnimatedSprite.play("360")
+		if(Input.is_action_pressed('grab') && Input.is_action_pressed('right')):
+			$AnimatedSprite.play('nose grab')
+			boostPower += 5
 	
 #func body_enter(body):
 #	print('pole stuff')

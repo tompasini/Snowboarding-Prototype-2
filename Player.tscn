@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprite Assets/Animations/1x16Jump_Grab_Grind_Falling_Animation-Sheet.png" type="Texture" id=2]
@@ -8,6 +8,21 @@
 flags = 4
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 20, 19 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 338, 0, 26, 21 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 390, 0, 26, 21 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 182, 0, 26, 21 )
 
 [sub_resource type="AtlasTexture" id=13]
 flags = 4
@@ -79,6 +94,21 @@ animations = [ {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 16 ) ],
+"loop": true,
+"name": "grind",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ) ],
+"loop": true,
+"name": "falling",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 18 ) ],
+"loop": true,
+"name": "nose grab",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 13 ) ],

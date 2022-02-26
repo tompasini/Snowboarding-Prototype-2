@@ -39,13 +39,10 @@ margin_bottom = -186.0
 text = "Speed: "
 
 [node name="Speed" type="Label" parent="Player"]
-margin_left = -330.0
-margin_top = -216.0
-margin_right = -250.0
-margin_bottom = -195.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = -329.0
+margin_top = -213.0
+margin_right = -249.0
+margin_bottom = -192.0
 
 [node name="BoostBar Label" type="Label" parent="Player"]
 margin_left = -228.0
