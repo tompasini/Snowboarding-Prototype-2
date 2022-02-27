@@ -55,14 +55,16 @@ func _physics_process(delta):
 	
 #	tricks
 	if(_state == States.IN_AIR):
-		if(Input.is_action_just_pressed("backflip")):
-			pass
-#			$AnimatedSprite.play('backflip')
+#		if(Input.is_action_just_pressed("backflip")):
+#			$AnimatedSprite.play('squat')
+#			assign_rotation(normal, 360)
 		if(Input.is_action_just_pressed("360")):
 			$AnimatedSprite.play("360")
 		if(Input.is_action_pressed('grab') && Input.is_action_pressed('right')):
 			$AnimatedSprite.play('nose grab')
 			boostPower += 5
+		if(Input.is_action_pressed('christ') && Input.is_action_pressed('right')):
+			$AnimatedSprite.play('christ')
 	
 #func body_enter(body):
 #	print('pole stuff')
@@ -103,6 +105,9 @@ func slow_down():
 
 func _on_AnimatedSprite_animation_finished():
 	if($AnimatedSprite.animation == '360'):
+		boostPower = (maxBoostPower / 2)
+		$BoostBar.value = boostPower
+	if($AnimatedSprite.animation == 'christ'):
 		boostPower = maxBoostPower
 		$BoostBar.value = boostPower
 		
