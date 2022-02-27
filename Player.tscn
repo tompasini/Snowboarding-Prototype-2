@@ -1,6 +1,6 @@
 [gd_scene load_steps=47 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://scripts/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprite Assets/Animations/1x16Jump_Grab_Grind_Falling_Animation-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprite Assets/Animations/Our_Boi/Revised_Spin_360.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Sprite Assets/Animations/Our_Boi/True_Christ_Air.png" type="Texture" id=4]
@@ -11,6 +11,11 @@
 flags = 4
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 20, 19 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 52, 0, 26, 21 )
 
 [sub_resource type="AtlasTexture" id=26]
 flags = 4
@@ -192,11 +197,6 @@ flags = 4
 atlas = ExtResource( 6 )
 region = Rect2( 20, 0, 20, 19 )
 
-[sub_resource type="AtlasTexture" id=15]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 52, 0, 26, 21 )
-
 [sub_resource type="AtlasTexture" id=16]
 flags = 4
 atlas = ExtResource( 2 )
@@ -207,6 +207,11 @@ animations = [ {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 15 ) ],
+"loop": true,
+"name": "jump",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
@@ -244,11 +249,6 @@ animations = [ {
 "name": "riding",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 15 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 16 ) ],
 "loop": true,
 "name": "grind",
@@ -268,7 +268,7 @@ visible = false
 polygon = PoolVector2Array( -5, -8, 4, -8, 4, -5, 2, -2, 7, -1, 7, 2, 4, 2, 4, 7, 8, 7, -9, 7, -6, 6, -4, 2, -9, 1, -7, -2, -3, -2 )
 
 [node name="Countdown" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 4.0
 one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
