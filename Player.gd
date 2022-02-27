@@ -7,6 +7,7 @@ var maxBoostPower = 500
 var jumpCount = 2
 var jumpHeight = -700
 var boostJumped
+var timer = 10
 const GRAVITY = 75
 const BASE_SPEED = 300
 const POLE_MODIFIER = 175
@@ -67,14 +68,14 @@ func _physics_process(delta):
 			$AnimatedSprite.play('christ')
 	
 #func body_enter(body):
-#	print('pole stuff')
-#	var isPole = body.is_in_group("pole")
-#	var direction = $AnimatedSprite.flip_h
-#	if(isPole):
-#		if(!direction):
-#			speed = (BASE_SPEED + POLE_MODIFIER)
-#		else:
-#			speed = -(BASE_SPEED + POLE_MODIFIER)
+##	print('pole stuff')
+##	var isPole = body.is_in_group("pole")
+##	var direction = $AnimatedSprite.flip_h
+##	if(isPole):
+##		if(!direction):
+##			speed = (BASE_SPEED + POLE_MODIFIER)
+##		else:
+##			speed = -(BASE_SPEED + POLE_MODIFIER)
 			
 func increase_speed(modifier, direction):
 	if(!direction):
@@ -135,5 +136,15 @@ func set_ground_state(normal):
 		else:
 			_state = States.ON_GROUND_IDLE
 			$AnimatedSprite.play("idle")
-		if(!jumpCount):
+		if(jumpCount != 2):
 			jumpCount = 2
+
+
+func _on_FinishFlag_body_exited(body):
+	if(body.is_in_group('player')):
+		speed = 0
+		$Countdown.start()
+		
+
+func _on_Countdown_timeout():
+	SceneManager.next_level()

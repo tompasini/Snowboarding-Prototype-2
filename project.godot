@@ -11,8 +11,12 @@ config_version=4
 [application]
 
 config/name="Snowboarding Prototype 2"
-run/main_scene="res://Level1.tscn"
+run/main_scene="res://levels/Level1.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+SceneManager="*res://scene_manager.gd"
 
 [input]
 
