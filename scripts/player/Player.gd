@@ -7,6 +7,7 @@ var maxBoostPower = 500
 var jumpCount = 2
 var jumpHeight = -700
 var boostJumped
+var timer = 10
 const GRAVITY = 75
 const BASE_SPEED = 300
 const POLE_MODIFIER = 175
@@ -55,24 +56,35 @@ func _physics_process(delta):
 	
 #	tricks
 	if(_state == States.IN_AIR):
-		if(Input.is_action_just_pressed("backflip")):
-			pass
-#			$AnimatedSprite.play('backflip')
 		if(Input.is_action_just_pressed("360")):
-			$AnimatedSprite.play("360")
+			$AnimatedSprite.play('360')
 		if(Input.is_action_pressed('grab') && Input.is_action_pressed('right')):
 			$AnimatedSprite.play('nose grab')
-			boostPower += 5
+			continuous_boost_power_modifier(5)
+		if(Input.is_action_pressed('christ') && Input.is_action_pressed('right')):
+			$AnimatedSprite.play('christ')
+			
+func continuous_boost_power_modifier(modifier):
+	boostPower += modifier
+	$BoostBar.value = boostPower
+	
+func _on_AnimatedSprite_animation_finished():
+	if($AnimatedSprite.animation == '360'):
+		boostPower = (maxBoostPower / 2)
+		$BoostBar.value = boostPower
+	if($AnimatedSprite.animation == 'christ'):
+		boostPower = maxBoostPower
+		$BoostBar.value = boostPower
 	
 #func body_enter(body):
-#	print('pole stuff')
-#	var isPole = body.is_in_group("pole")
-#	var direction = $AnimatedSprite.flip_h
-#	if(isPole):
-#		if(!direction):
-#			speed = (BASE_SPEED + POLE_MODIFIER)
-#		else:
-#			speed = -(BASE_SPEED + POLE_MODIFIER)
+##	print('pole stuff')
+##	var isPole = body.is_in_group("pole")
+##	var direction = $AnimatedSprite.flip_h
+##	if(isPole):
+##		if(!direction):
+##			speed = (BASE_SPEED + POLE_MODIFIER)
+##		else:
+##			speed = -(BASE_SPEED + POLE_MODIFIER)
 			
 func increase_speed(modifier, direction):
 	if(!direction):
@@ -99,12 +111,6 @@ func slow_down():
 	if($Timer.time_left == 0):
 			speed -= 50
 			$Timer.start()
-
-
-func _on_AnimatedSprite_animation_finished():
-	if($AnimatedSprite.animation == '360'):
-		boostPower = maxBoostPower
-		$BoostBar.value = boostPower
 		
 func jump():
 	velocity.y = -1
@@ -130,5 +136,15 @@ func set_ground_state(normal):
 		else:
 			_state = States.ON_GROUND_IDLE
 			$AnimatedSprite.play("idle")
-		if(!jumpCount):
+		if(jumpCount != 2):
 			jumpCount = 2
+
+
+func _on_FinishFlag_body_exited(body):
+	if(body.is_in_group('player')):
+		speed = 0
+		$Countdown.start()
+		
+
+func _on_Countdown_timeout():
+	SceneManager.next_level()
