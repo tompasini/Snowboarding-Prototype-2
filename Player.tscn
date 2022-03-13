@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://scripts/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprite Assets/Animations/1x16Jump_Grab_Grind_Falling_Animation-Sheet.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Sprite Assets/Animations/Our_Boi/True_Christ_Air.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprite Assets/Animations/Our_Boi/Christ_Air_Animation.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprite Assets/Animations/Sprite_Rotation_Animation.png" type="Texture" id=6]
+[ext_resource path="res://LevelTimer.tscn" type="PackedScene" id=7]
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -286,6 +287,13 @@ process_mode = 0
 wait_time = 2.0
 one_shot = true
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -380.0
+margin_top = -222.0
+margin_right = 100.0
+margin_bottom = -161.0
+color = Color( 0.329412, 0.337255, 0.356863, 1 )
+
 [node name="Speed Label" type="Label" parent="."]
 margin_left = -376.0
 margin_top = -213.0
@@ -315,6 +323,19 @@ margin_bottom = -171.0
 custom_styles/fg = SubResource( 52 )
 max_value = 500.0
 percent_visible = false
+
+[node name="LevelTimerLabel" type="Label" parent="."]
+margin_left = -29.0
+margin_top = -213.0
+margin_right = 11.0
+margin_bottom = -199.0
+text = "Time: "
+
+[node name="LevelTimer" parent="." instance=ExtResource( 7 )]
+margin_left = 13.0
+margin_top = -213.0
+margin_right = 53.0
+margin_bottom = -199.0
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="Countdown" to="." method="_on_Countdown_timeout"]

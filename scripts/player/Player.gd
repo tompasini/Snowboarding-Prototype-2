@@ -142,6 +142,7 @@ func set_ground_state(normal):
 
 func _on_FinishFlag_body_exited(body):
 	if(body.is_in_group('player')):
+		$LevelTimer.finished = true
 		speed = 0
 		$Countdown.start()
 		
