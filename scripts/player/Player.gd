@@ -108,9 +108,9 @@ func assign_rotation(normal, degrees):
 	return normal.angle() + offset
 	
 func slow_down():
-	if($Timer.time_left == 0):
+	if($SlowDownTimer.time_left == 0):
 			speed -= 50
-			$Timer.start()
+			$SlowDownTimer.start()
 		
 func jump():
 	velocity.y = -1
