@@ -16,7 +16,7 @@ tile_data = PoolIntArray( 786437, 57, 0, 786438, 66, 0, 786439, 66, 0, 786440, 6
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 94, 183 )
 
-[node name="Sprite" type="Sprite" parent="Player"]
+[node name="Background" type="Sprite" parent="Player"]
 position = Vector2( 502, 175.5 )
 scale = Vector2( 2.77187, 2.23611 )
 z_index = -1
