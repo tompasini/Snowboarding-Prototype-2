@@ -149,3 +149,12 @@ func _on_FinishFlag_body_exited(body):
 
 func _on_Countdown_timeout():
 	SceneManager.next_level()
+
+
+func _on_FallThreshold_body_entered(body):
+	if(body.is_in_group('player') && !$LevelTimer.finished):
+		get_tree().reload_current_scene()
+
+#func _unhandled_input(event):
+#	if event is InputEventKey :
+#
