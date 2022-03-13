@@ -108,9 +108,9 @@ func assign_rotation(normal, degrees):
 	return normal.angle() + offset
 	
 func slow_down():
-	if($Timer.time_left == 0):
+	if($SlowDownTimer.time_left == 0):
 			speed -= 50
-			$Timer.start()
+			$SlowDownTimer.start()
 		
 func jump():
 	velocity.y = -1
@@ -142,9 +142,19 @@ func set_ground_state(normal):
 
 func _on_FinishFlag_body_exited(body):
 	if(body.is_in_group('player')):
+		$LevelTimer.finished = true
 		speed = 0
 		$Countdown.start()
 		
 
 func _on_Countdown_timeout():
 	SceneManager.next_level()
+
+
+func _on_FallThreshold_body_entered(body):
+	if(body.is_in_group('player') && !$LevelTimer.finished):
+		get_tree().reload_current_scene()
+
+#func _unhandled_input(event):
+#	if event is InputEventKey :
+#
