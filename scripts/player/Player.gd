@@ -8,6 +8,7 @@ var jumpCount = 2
 var jumpHeight = -700
 var boostJumped
 var timer = 10
+var isSnowboarding = true
 const GRAVITY = 75
 const BASE_SPEED = 300
 const POLE_MODIFIER = 175
@@ -17,40 +18,9 @@ enum States {ON_GROUND_IDLE, ON_GROUND_RIDING, IN_AIR}
 var _state = States.ON_GROUND_IDLE
 
 func _physics_process(delta):
-	var normal: Vector2 = get_floor_normal()
-	if(normal):	
-		$AnimatedSprite.rotation = assign_rotation(normal, 90)
-	if (Input.is_action_pressed("right") && speed <= 0):
-		speed = BASE_SPEED
-		$AnimatedSprite.flip_h = false
-	elif(Input.is_action_pressed("left") && speed >= 0):
-		speed = -BASE_SPEED
-		$AnimatedSprite.flip_h = true
-	elif(Input.is_action_pressed("reset")):
-		get_tree().reload_current_scene()
-		
-	if(is_on_floor()):
-		set_ground_state(normal)
-
-	if(Input.is_action_just_pressed("jump") && jumpCount != 0):
-		jump()
 	
-	if(Input.is_action_pressed("boost") && boostPower > 0 && speed != 0):
-		if(Input.is_action_just_pressed("jump") && jumpCount > 0):
-			boostJumped = true
-		if(boostJumped && _state == States.IN_AIR):
-			$AnimatedSprite.play("jump")
-		else:
-			$AnimatedSprite.play("squat")
-		boostPower -= 10
-		$BoostBar.value = boostPower
-		increase_speed(10, $AnimatedSprite.flip_h)
-	
-	set_velocity()
-	
-	
-	if(speed > BASE_SPEED && normal.x == 0):
-		slow_down()
+	if(isSnowboarding):
+		snowboarding_process()
 		
 	$Speed.text = str(speed)
 	
@@ -158,3 +128,42 @@ func _on_FallThreshold_body_entered(body):
 #func _unhandled_input(event):
 #	if event is InputEventKey :
 #
+
+func snowboarding_process():
+	var normal: Vector2 = get_floor_normal()
+	if(normal):	
+		$AnimatedSprite.rotation = assign_rotation(normal, 90)
+	if (Input.is_action_pressed("right") && speed <= 0):
+		speed = BASE_SPEED
+		$AnimatedSprite.flip_h = false
+	elif(Input.is_action_pressed("left") && speed >= 0):
+		speed = -BASE_SPEED
+		$AnimatedSprite.flip_h = true
+	elif(Input.is_action_pressed("reset")):
+		get_tree().reload_current_scene()
+		
+	if(is_on_floor()):
+		set_ground_state(normal)
+		
+#	if(Input.is_action_just_pressed('break')):
+#		speed = 0
+
+	if(Input.is_action_just_pressed("jump") && jumpCount != 0):
+		jump()
+	
+	if(Input.is_action_pressed("boost") && boostPower > 0 && speed != 0):
+		if(Input.is_action_just_pressed("jump") && jumpCount > 0):
+			boostJumped = true
+		if(boostJumped && _state == States.IN_AIR):
+			$AnimatedSprite.play("jump")
+		else:
+			$AnimatedSprite.play("squat")
+		boostPower -= 10
+		$BoostBar.value = boostPower
+		increase_speed(10, $AnimatedSprite.flip_h)
+	
+	set_velocity()
+	
+	
+	if(speed > BASE_SPEED && normal.x == 0):
+		slow_down()

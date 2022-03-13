@@ -270,7 +270,6 @@ animation = "idle"
 speed_scale = 5.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
 polygon = PoolVector2Array( -5, -8, 4, -8, 4, -5, 2, -2, 7, -1, 7, 2, 4, 2, 4, 7, 8, 7, -9, 7, -6, 6, -4, 2, -9, 1, -7, -2, -3, -2 )
 
 [node name="Countdown" type="Timer" parent="."]
